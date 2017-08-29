@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+ <script>
+ var mydata=[
+ {"id":"0001","name":"张三","namesx":"zs","grade":"5","class":"1","tel":"138","arrive":"false","arrivetime":"11"},
+ {"id":"0002","name":"李四","namesx":"ls","grade":"6","class":"4","tel":"1223","arrive":"true","arrivetime":"11"},
+ {"id":"0003","name":"王五","namesx":"ww","grade":"4","class":"3","tel":"138","arrive":"false","arrivetime":"11"},
+ {"id":"0004","name":"赵六","namesx":"zl","grade":"1","class":"1","tel":"138","arrive":"true","arrivetime":"11"},
+ {"id":"0005","name":"陈七","namesx":"cq","grade":"2","class":"1","tel":"138","arrive":"false","arrivetime":"11"},
+ {"id":"0006","name":"李明明","namesx":"lmm","grade":"2","class":"6","tel":"138","arrive":"false","arrivetime":"11"},
+ {"id":"0007","name":"啊啊啊","namesx":"aaa","grade":"2","class":"6","tel":"138","arrive":"false","arrivetime":"11"},
+ ]
+ 
+  $(document).ready( function () {
+    var table = $('#mytable').DataTable({
+		"paging": false,
+		"data":mydata,
+		"columns":[
+		{"data":"namesx"},
+		{"data":"id"},
+		{"data":"name"},
+		{"data":"grade"},
+		{"data":"arrive"},
+		
+		],
+		"columnDefs": [
+			{
+				
+	            "render": function(data, type, row) {
+					console.log(row);
+	                return  data+'('+row.class+')';
+	            },
+	            "targets": 3
+	        },
+	        {
+	            "visible": false,
+	            "targets": [0,4]
+	        },
+			
+		],
+		"createdRow":function(row,data,dataIndex){
+			if(data.arrive=="true"){
+				$(row).addClass("selected")
+			}
+		},
+		"order":[[0,"asc"]]
+	});
+
+	
+	var searchWords=""
+    $('.keyboard').click(function(){
+		var v = $(this).text()
+		searchWords+=v
+        table.column(0).search(searchWords).draw();
+		$("[type=search]").val(searchWords)
+    });
+    $('.del').click(function(){
+		 searchWords=""
+		 $("[type=search]").val("")
+         table.column(0).search("").draw();
+    });  
+	$('.filter').click(function(){
+		if($(this).text()=="过滤"){
+			searchWords="";
+		table.column(0).search("");
+		 table.column(4).search("false").draw();
+		 $(this).text("不过滤")
+		}else if($(this).text()=="不过滤"){
+			table.column(0).search("");
+			table.column(4).search("").draw();
+			
+			$(this).text("过滤")
+		}
+        
+    });
+
+
+	$("#mytable tbody").on("click","tr",function(){
+		$(this).toggleClass("selected")
+	})
+	$('.save').click(function(){
+		table.rows('.selected').data().each(function(e){
+		alert(e.name)
+		console.log(e)
+		//save to database
+		})
+		
+	})
+
+} );
+
+
+	
+
+
+ </script>
+ <body>
+
+
+<button class="keyboard"  >a</button>
+<button class="keyboard"  >b</button>
+<button class="keyboard"  >c</button>
+<button class="keyboard"  >d</button>
+<button class="keyboard"  >e</button>
+<button class="keyboard"  >f</button>
+<button class="keyboard"  >g</button>
+<button class="keyboard"  >h</button>
+<button class="keyboard"  >j</button>
+<button class="keyboard"  >k</button>
+<button class="keyboard"  >l</button>
+<button class="keyboard"  >m</button>
+<button class="keyboard"  >n</button>
+<button class="keyboard"  >o</button>
+<button class="keyboard"  >p</button>
+<button class="keyboard"  >q</button>
+<button class="keyboard"  >r</button>
+<button class="keyboard"  >s</button>
+<button class="keyboard"  >t</button>
+<button class="keyboard"  >w</button>
+<button class="keyboard"  >x</button>
+<button class="keyboard"  >y</button>
+<button class="keyboard"  >z</button>
+<button class="del"  >删除</button>
+<button class="filter"  >过滤</button>
+<button class="save"  >保存</button>
+  <table id="mytable" class="display">
+    <thead>
+        <tr>
+		    <th>namesx</th>
+			<th>序号</th>
+            <th>姓名</th>
+            <th>班级</th>
+			<th>arrive</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+
+
+ </body>
+</html>
