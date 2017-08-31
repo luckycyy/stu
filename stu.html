@@ -8,9 +8,20 @@
   <meta name="Description" content="">
   <title>Document</title>
  </head>
- <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+ 
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="media/css/jquery.dataTables.css">
+<style type="text/css">
+.keyboard {width: 13%;height:25px}
+
+</style>
+ 
+<!-- jQuery -->
+<script type="text/javascript" charset="utf8" src="media/js/jquery.js"></script>
+ 
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="media/js/jquery.dataTables.min.js"></script>
+
  <script>
  var mydata=[
  {"id":"0001","name":"张三","namesx":"zs","grade":"5","class":"1","tel":"138","arrive":"false","arrivetime":"11"},
@@ -28,8 +39,8 @@
 		"data":mydata,
 		"columns":[
 		{"data":"namesx"},
-		{"data":"id"},
-		{"data":"name"},
+		{"data":"id","width":"33%"},
+		{"data":"name","width":"33%"},
 		{"data":"grade"},
 		{"data":"arrive"},
 		
@@ -71,16 +82,16 @@
          table.column(0).search("").draw();
     });  
 	$('.filter').click(function(){
-		if($(this).text()=="过滤"){
+		if($(this).text()=="查看未到达"){
 			searchWords="";
 		table.column(0).search("");
 		 table.column(4).search("false").draw();
-		 $(this).text("不过滤")
-		}else if($(this).text()=="不过滤"){
+		 $(this).text("查看所有")
+		}else if($(this).text()=="查看所有"){
 			table.column(0).search("");
 			table.column(4).search("").draw();
 			
-			$(this).text("过滤")
+			$(this).text("查看未到达")
 		}
         
     });
@@ -91,7 +102,7 @@
 	})
 	$('.save').click(function(){
 		table.rows('.selected').data().each(function(e){
-		alert(e.name)
+		//alert(e.name)
 		console.log(e)
 		//save to database
 		})
@@ -105,9 +116,9 @@
 
 
  </script>
- <body>
+ <body style="width:400px">
 
-
+<div id="keys" style="z-index: 9999; position: fixed ! important; right: 0px; top: 0px;background:white;">
 <button class="keyboard"  >a</button>
 <button class="keyboard"  >b</button>
 <button class="keyboard"  >c</button>
@@ -131,9 +142,12 @@
 <button class="keyboard"  >x</button>
 <button class="keyboard"  >y</button>
 <button class="keyboard"  >z</button>
-<button class="del"  >删除</button>
-<button class="filter"  >过滤</button>
+<button class="del"  >取消搜索</button>
+<button class="filter"  >查看未到达</button>
 <button class="save"  >保存</button>
+<hr>
+</div>
+<div style="position: absolute ! important; top: 100px;">
   <table id="mytable" class="display">
     <thead>
         <tr>
@@ -148,7 +162,7 @@
         
     </tbody>
 </table>
-
+</div>
 
  </body>
 </html>
