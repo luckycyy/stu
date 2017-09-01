@@ -2,10 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <meta name="Generator" content="EditPlus®">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
   <title>Document</title>
  </head>
  
@@ -31,6 +28,12 @@
  {"id":"0005","name":"陈七","namesx":"cq","grade":"2","class":"1","tel":"138","arrive":"false","arrivetime":"11"},
  {"id":"0006","name":"李明明","namesx":"lmm","grade":"2","class":"6","tel":"138","arrive":"false","arrivetime":"11"},
  {"id":"0007","name":"啊啊啊","namesx":"aaa","grade":"2","class":"6","tel":"138","arrive":"false","arrivetime":"11"},
+ {"id":"0008","name":"李明明","namesx":"lmm","grade":"2","class":"6","tel":"138","arrive":"false","arrivetime":"11"},
+ {"id":"0009","name":"小李","namesx":"xl","grade":"2","class":"6","tel":"138","arrive":"false","arrivetime":"11"},
+ {"id":"0010","name":"张三丰","namesx":"zsf","grade":"2","class":"6","tel":"138","arrive":"false","arrivetime":"11"},
+ {"id":"0011","name":"谢逊","namesx":"xx","grade":"2","class":"6","tel":"138","arrive":"false","arrivetime":"11"},
+ {"id":"0012","name":"刘德华","namesx":"ldh","grade":"2","class":"6","tel":"138","arrive":"false","arrivetime":"11"},
+ {"id":"0013","name":"范冰冰","namesx":"fbb","grade":"2","class":"6","tel":"138","arrive":"false","arrivetime":"11"},
  ]
  
   $(document).ready( function () {
@@ -41,7 +44,7 @@
 		{"data":"namesx"},
 		{"data":"id","width":"33%"},
 		{"data":"name","width":"33%"},
-		{"data":"grade"},
+		{"data":"grade","width":"33%"},
 		{"data":"arrive"},
 		
 		],
@@ -116,9 +119,9 @@
 
 
  </script>
- <body style="width:400px">
+ <body>
 
-<div id="keys" style="z-index: 9999; position: fixed ! important; right: 0px; top: 0px;background:white;">
+<div id="keys" style="height:110px;z-index: 9999; position: fixed ! important; right: 0px; top: 0px;background:white;">
 <button class="keyboard"  >a</button>
 <button class="keyboard"  >b</button>
 <button class="keyboard"  >c</button>
@@ -147,8 +150,8 @@
 <button class="save"  >保存</button>
 <hr>
 </div>
-<div style="position: absolute ! important; top: 100px;">
-  <table id="mytable" class="display">
+<div style="width:97%; ! important;">
+  <table id="mytable" style="flex:1" class="display">
     <thead>
         <tr>
 		    <th>namesx</th>
